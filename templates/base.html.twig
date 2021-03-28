@@ -1,19 +1,351 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+{# <html lang="{{ app.request.locale }}" dir="ltr"> #}
+<html lang="fa" dir="rtl">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+	</head>
+	<body>
+		<header class="position-absolute pt-2 w-100">
+			<div class="infohead">
+				<div class="wsmobileheader clearfix">
+					<a id="wsnavtoggle" class="wsanimated-arrow">
+						<span></span>
+					</a>
+					<div class="support-respon">
+						<a href="" class="navtext" data-toggle="modal" data-target="#login_register">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewbox="0 0 67.477 75.103">
+								<defs>
+									<linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientunits="objectBoundingBox">
+										<stop offset="0" stop-color="#515d8a"/>
+										<stop offset="1" stop-color="#273051"/>
+									</linearGradient>
+								</defs>
+								<g id="support_1_" data-name="support(1)" transform="translate(-26)">
+									<g id="Group_72" data-name="Group 72" transform="translate(74.406 58.088)">
+										<g id="Group_71" data-name="Group 71">
+											<path id="Path_301" data-name="Path 301" d="M357.467,396a1.467,1.467,0,1,0,1.467,1.467A1.467,1.467,0,0,0,357.467,396Z" transform="translate(-356 -396)" fill="url(#linear-gradient)"/>
+										</g>
+									</g>
+									<g id="Group_74" data-name="Group 74" transform="translate(26)">
+										<g id="Group_73" data-name="Group 73" transform="translate(0)">
+											<path id="Path_302" data-name="Path 302" d="M79.485,53.344l-6.972-2.324-2.5-5.006a16.066,16.066,0,0,0,4.348-8.5l.312-1.871h2.67a4.406,4.406,0,0,0,4.4-4.4V22a22,22,0,1,0-44.006,0v9.241a4.408,4.408,0,0,0,2.934,4.148v1.719a4.406,4.406,0,0,0,4.4,4.4h1.288a15.914,15.914,0,0,0,2.461,3.81c.208.239.424.47.646.7l-2.5,5L39.99,53.344C31.884,56.048,26,64.582,26,73.636A1.467,1.467,0,0,0,27.467,75.1H92.009a1.467,1.467,0,0,0,1.467-1.467C93.476,64.582,87.592,56.048,79.485,53.344Zm-.678-22.1a1.469,1.469,0,0,1-1.467,1.467H75.1c.373-2.888.621-5.962.721-8.989,0-.085.005-.168.008-.252h2.976ZM42.135,32.711a1.469,1.469,0,0,1-1.467-1.467V23.47h2.977q.007.229.016.461c0,.005,0,.01,0,.016h0c.1,2.944.348,5.938.712,8.763H42.135Zm2.934,5.867A1.469,1.469,0,0,1,43.6,37.112V35.645h1.2l.312,1.872c.06.356.133.71.217,1.062ZM43.6,20.536h-2.88a19.07,19.07,0,0,1,38.027,0h-2.88A14.857,14.857,0,0,0,61.051,5.867H58.425A14.857,14.857,0,0,0,43.6,20.536ZM58.425,8.8h2.626A11.928,11.928,0,0,1,72.94,20.743c0,.462,0,.864-.011,1.229,0,0,0,.01,0,.014l-1.835-.262A23.57,23.57,0,0,1,57.841,15.1a1.467,1.467,0,0,0-1.037-.43A13.271,13.271,0,0,0,46.6,19.5,11.924,11.924,0,0,1,58.425,8.8ZM48.375,38.578c-.734-2.443-1.575-9.63-1.76-14.236L48.59,21.71a10.325,10.325,0,0,1,7.635-4.091,26.532,26.532,0,0,0,14.454,7.01l2.16.309C72.694,28,72.4,31.075,71.976,33.9v0c-.134.909-.24,1.494-.511,3.128a12.46,12.46,0,0,1-8.843,10.021,11.541,11.541,0,0,1-12.956-5.542h2.99A4.407,4.407,0,0,0,56.8,44.446h2.934a4.4,4.4,0,1,0,0-8.8H56.8a4.4,4.4,0,0,0-4.151,2.934Zm8.305,11.444a14.713,14.713,0,0,0,5.456.123l-2.592,2.741Zm.847,5-4.653,4.92a55.889,55.889,0,0,1-3.284-7.615l1.747-3.494Zm10.361-6.687,2,3.991A55.874,55.874,0,0,1,66.6,59.941l-4.98-4.98ZM55.337,40.045A1.467,1.467,0,0,1,56.8,38.578h2.934a1.467,1.467,0,0,1,0,2.934H56.8A1.469,1.469,0,0,1,55.337,40.045ZM28.992,72.17C29.574,64.9,34.41,58.3,40.918,56.128l6.175-2.058a58.8,58.8,0,0,0,4.175,9.056l.008.015h0a58.818,58.818,0,0,0,4.015,6.131l1.8,2.9Zm30.745-1.308-1.989-3.194q-.033-.054-.071-.1a55.928,55.928,0,0,1-3.305-4.938L59.6,57.094l5.512,5.512A55.867,55.867,0,0,1,61.8,67.564C61.727,67.659,61.829,67.508,59.738,70.862ZM62.38,72.17l1.8-2.9a58.794,58.794,0,0,0,4.043-6.18l.022-.039,0,0a58.755,58.755,0,0,0,4.131-8.979l6.174,2.058C85.066,58.3,89.9,64.9,90.483,72.17H62.38Z" transform="translate(-26)" fill="url(#linear-gradient)"/>
+										</g>
+									</g>
+									<g id="Group_76" data-name="Group 76" transform="translate(79.561 60.888)">
+										<g id="Group_75" data-name="Group 75">
+											<path id="Path_303" data-name="Path 303" d="M397.653,420.434a14.665,14.665,0,0,0-4.153-5.041,1.467,1.467,0,0,0-1.789,2.325,11.714,11.714,0,0,1,3.317,4.027,1.467,1.467,0,0,0,2.625-1.311Z" transform="translate(-391.139 -415.088)" fill="url(#linear-gradient)"/>
+										</g>
+									</g>
+								</g>
+							</svg>
+							پشتیبانی
+						</a>
+					</div>
+					<div class="smllogo" data-aos-duration="1500" data-aos="fade-down">
+						<a href="{{ path('home') }}">
+							<img src="{{ asset('build/img/fourtheme/logo.png') }}" class="img-fluid logo d-block" alt=""/>
+						</a>
+					</div>
+				</div>
+				<div class="headerfull">
+					<div class="wsmain d-flex align-items-center">
+						<div class="smllogo" data-aos-duration="1500" data-aos="fade-down">
+							<a href="{{ path('home') }}">
+								<img src="{{ asset('build/img/fourtheme/logo.png') }}" class="img-fluid logo d-block" alt=""/>
+							</a>
+						</div>
+						<nav class="wsmenu clearfix">
+							<ul class="wsmenu-list smooth-scroll">
+								<li>
+									<a href="{{ path('home') }}" class="navtext active">
+										صفحه اصلی
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('templates') }}" class="navtext">
+										نمونه کارها
+									</a>
+									<div class="wsmegamenu clearfix halfmenu">
+										<ul class="wstliststy06 clearfix">
+											<li>
+												<a href="{{ path('template_category') }}">طراحی وب سایت</a>
+											</li>
+											<li>
+												<a href="{{ path('template_category') }}">طراحی سایت فروشگاهی</a>
+											</li>
+											<li>
+												<a href="{{ path('template_category') }}">طراحی سایت رزرواسیون</a>
+											</li>
+											<li>
+												<a href="{{ path('template_category') }}">طراحی سایت شرکتی</a>
+											</li>
+											<li>
+												<a href="{{ path('template_category') }}">طراحی سایت خلاقانه</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a href="{{ path('blog') }}" class="navtext">
+										وبلاگ
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('about_us') }}" class="navtext">
+										درباره ما
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('contact') }}" class="navtext">
+										تماس با ما
+									</a>
+								</li>
+								<li class="support-link mr-auto">
+									<a href="" class="navtext">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewbox="0 0 67.477 75.103">
+											<defs>
+												<linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientunits="objectBoundingBox">
+													<stop offset="0" stop-color="#515d8a"/>
+													<stop offset="1" stop-color="#273051"/>
+												</linearGradient>
+											</defs>
+											<g id="support_1_" data-name="support(1)" transform="translate(-26)">
+												<g id="Group_72" data-name="Group 72" transform="translate(74.406 58.088)">
+													<g id="Group_71" data-name="Group 71">
+														<path id="Path_301" data-name="Path 301" d="M357.467,396a1.467,1.467,0,1,0,1.467,1.467A1.467,1.467,0,0,0,357.467,396Z" transform="translate(-356 -396)" fill="url(#linear-gradient)"/>
+													</g>
+												</g>
+												<g id="Group_74" data-name="Group 74" transform="translate(26)">
+													<g id="Group_73" data-name="Group 73" transform="translate(0)">
+														<path id="Path_302" data-name="Path 302" d="M79.485,53.344l-6.972-2.324-2.5-5.006a16.066,16.066,0,0,0,4.348-8.5l.312-1.871h2.67a4.406,4.406,0,0,0,4.4-4.4V22a22,22,0,1,0-44.006,0v9.241a4.408,4.408,0,0,0,2.934,4.148v1.719a4.406,4.406,0,0,0,4.4,4.4h1.288a15.914,15.914,0,0,0,2.461,3.81c.208.239.424.47.646.7l-2.5,5L39.99,53.344C31.884,56.048,26,64.582,26,73.636A1.467,1.467,0,0,0,27.467,75.1H92.009a1.467,1.467,0,0,0,1.467-1.467C93.476,64.582,87.592,56.048,79.485,53.344Zm-.678-22.1a1.469,1.469,0,0,1-1.467,1.467H75.1c.373-2.888.621-5.962.721-8.989,0-.085.005-.168.008-.252h2.976ZM42.135,32.711a1.469,1.469,0,0,1-1.467-1.467V23.47h2.977q.007.229.016.461c0,.005,0,.01,0,.016h0c.1,2.944.348,5.938.712,8.763H42.135Zm2.934,5.867A1.469,1.469,0,0,1,43.6,37.112V35.645h1.2l.312,1.872c.06.356.133.71.217,1.062ZM43.6,20.536h-2.88a19.07,19.07,0,0,1,38.027,0h-2.88A14.857,14.857,0,0,0,61.051,5.867H58.425A14.857,14.857,0,0,0,43.6,20.536ZM58.425,8.8h2.626A11.928,11.928,0,0,1,72.94,20.743c0,.462,0,.864-.011,1.229,0,0,0,.01,0,.014l-1.835-.262A23.57,23.57,0,0,1,57.841,15.1a1.467,1.467,0,0,0-1.037-.43A13.271,13.271,0,0,0,46.6,19.5,11.924,11.924,0,0,1,58.425,8.8ZM48.375,38.578c-.734-2.443-1.575-9.63-1.76-14.236L48.59,21.71a10.325,10.325,0,0,1,7.635-4.091,26.532,26.532,0,0,0,14.454,7.01l2.16.309C72.694,28,72.4,31.075,71.976,33.9v0c-.134.909-.24,1.494-.511,3.128a12.46,12.46,0,0,1-8.843,10.021,11.541,11.541,0,0,1-12.956-5.542h2.99A4.407,4.407,0,0,0,56.8,44.446h2.934a4.4,4.4,0,1,0,0-8.8H56.8a4.4,4.4,0,0,0-4.151,2.934Zm8.305,11.444a14.713,14.713,0,0,0,5.456.123l-2.592,2.741Zm.847,5-4.653,4.92a55.889,55.889,0,0,1-3.284-7.615l1.747-3.494Zm10.361-6.687,2,3.991A55.874,55.874,0,0,1,66.6,59.941l-4.98-4.98ZM55.337,40.045A1.467,1.467,0,0,1,56.8,38.578h2.934a1.467,1.467,0,0,1,0,2.934H56.8A1.469,1.469,0,0,1,55.337,40.045ZM28.992,72.17C29.574,64.9,34.41,58.3,40.918,56.128l6.175-2.058a58.8,58.8,0,0,0,4.175,9.056l.008.015h0a58.818,58.818,0,0,0,4.015,6.131l1.8,2.9Zm30.745-1.308-1.989-3.194q-.033-.054-.071-.1a55.928,55.928,0,0,1-3.305-4.938L59.6,57.094l5.512,5.512A55.867,55.867,0,0,1,61.8,67.564C61.727,67.659,61.829,67.508,59.738,70.862ZM62.38,72.17l1.8-2.9a58.794,58.794,0,0,0,4.043-6.18l.022-.039,0,0a58.755,58.755,0,0,0,4.131-8.979l6.174,2.058C85.066,58.3,89.9,64.9,90.483,72.17H62.38Z" transform="translate(-26)" fill="url(#linear-gradient)"/>
+													</g>
+												</g>
+												<g id="Group_76" data-name="Group 76" transform="translate(79.561 60.888)">
+													<g id="Group_75" data-name="Group 75">
+														<path id="Path_303" data-name="Path 303" d="M397.653,420.434a14.665,14.665,0,0,0-4.153-5.041,1.467,1.467,0,0,0-1.789,2.325,11.714,11.714,0,0,1,3.317,4.027,1.467,1.467,0,0,0,2.625-1.311Z" transform="translate(-391.139 -415.088)" fill="url(#linear-gradient)"/>
+													</g>
+												</g>
+											</g>
+										</svg>
+										پشتیبانی
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		{% block banner %}
+
+			<section class="bg-topPage">
+				<img src="{{ asset('build/img/fourtheme/banner.jpg') }}" class="img-fluid" alt=""/>
+
+				<div class="container-fluid">
+					<div class="row justify-content-center">
+						<div class="col-11">
+							<div class="d-flex info align-items-center flex-wrap">
+								<ul class="breadcrumb breadcrumb-list">
+									<li class="breadcrumb-item">
+										<a href="">
+											صفحه نخست
+										</a>
+									</li>
+									<li class="breadcrumb-item">
+										<span>
+											تماس با ما
+										</span>
+									</li>
+								</ul>
+								<div class="phone-Consulting mr-auto">
+									<a href="" class="text-white">
+										<i class="fa fa-phone ml-1"></i>
+										<strong class="numb">09339670709</strong>
+									</a>
+									مشاوره رایگان طراحی سایت
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		<footer id="section7">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-7 mx-lg-0 mx-auto col-12">
+						<div class="contact-footer mb-lg-3 mb-5">
+							<div class="Logo_footer mb-4 text-center">
+								<a href="">
+									<img src="{{ asset('build/img/fourtheme/logowhite.png') }}" class="img-fluid d-inline-block" alt=""/>
+									<span class="text">گروه برنامه نویسی وب سورس</span>
+								</a>
+							</div>
+							<div class="contact d-flex flex-wrap justify-content-around">
+								<div class="number line">
+									<span class="numb">09339670709</span>
+									<span class="ico">
+										<i class="fa fa-phone"></i>
+									</span>
+								</div>
+								<div class="email line">
+									info@gmail.com
+									<span class="ico">
+										<i class="fa fa-envelope"></i>
+									</span>
+								</div>
+							</div>
+							<ul class="social-icons list-inline text-center mt-3 d-flex align-items-center flex-wrap justify-content-center">
+								<li class="list-inline-item">
+									<a href="" data-toggle="tooltip" data-placement="top" title="واتس اپ وب سورس">
+										<svg xmlns="http://www.w3.org/2000/svg" height="512px" viewbox="-23 -21 682 682.66669" width="512px">
+											<g><path d="m544.386719 93.007812c-59.875-59.945312-139.503907-92.9726558-224.335938-93.007812-174.804687 0-317.070312 142.261719-317.140625 317.113281-.023437 55.894531 14.578125 110.457031 42.332032 158.550781l-44.992188 164.335938 168.121094-44.101562c46.324218 25.269531 98.476562 38.585937 151.550781 38.601562h.132813c174.785156 0 317.066406-142.273438 317.132812-317.132812.035156-84.742188-32.921875-164.417969-92.800781-224.359376zm-224.335938 487.933594h-.109375c-47.296875-.019531-93.683594-12.730468-134.160156-36.742187l-9.621094-5.714844-99.765625 26.171875 26.628907-97.269531-6.269532-9.972657c-26.386718-41.96875-40.320312-90.476562-40.296875-140.28125.054688-145.332031 118.304688-263.570312 263.699219-263.570312 70.40625.023438 136.589844 27.476562 186.355469 77.300781s77.15625 116.050781 77.132812 186.484375c-.0625 145.34375-118.304687 263.59375-263.59375 263.59375zm144.585938-197.417968c-7.921875-3.96875-46.882813-23.132813-54.148438-25.78125-7.257812-2.644532-12.546875-3.960938-17.824219 3.96875-5.285156 7.929687-20.46875 25.78125-25.09375 31.066406-4.625 5.289062-9.242187 5.953125-17.167968 1.984375-7.925782-3.964844-33.457032-12.335938-63.726563-39.332031-23.554687-21.011719-39.457031-46.960938-44.082031-54.890626-4.617188-7.9375-.039062-11.8125 3.476562-16.171874 8.578126-10.652344 17.167969-21.820313 19.808594-27.105469 2.644532-5.289063 1.320313-9.917969-.664062-13.882813-1.976563-3.964844-17.824219-42.96875-24.425782-58.839844-6.4375-15.445312-12.964843-13.359374-17.832031-13.601562-4.617187-.230469-9.902343-.277344-15.1875-.277344-5.28125 0-13.867187 1.980469-21.132812 9.917969-7.261719 7.933594-27.730469 27.101563-27.730469 66.105469s28.394531 76.683594 32.355469 81.972656c3.960937 5.289062 55.878906 85.328125 135.367187 119.648438 18.90625 8.171874 33.664063 13.042968 45.175782 16.695312 18.984374 6.03125 36.253906 5.179688 49.910156 3.140625 15.226562-2.277344 46.878906-19.171875 53.488281-37.679687 6.601563-18.511719 6.601563-34.375 4.617187-37.683594-1.976562-3.304688-7.261718-5.285156-15.183593-9.253906zm0 0" fill-rule="evenodd" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g>
+										</svg>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a href="" data-toggle="tooltip" data-placement="top" title="تلگرام وب سورس">
+										<i class="fab fa-telegram-plane"></i>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a href="" data-toggle="tooltip" data-placement="top" title="اینستاگرام وب سورس">
+										<i class="fab fa-instagram"></i>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a href="" data-toggle="tooltip" data-placement="top" title="ایمیل وب سورس">
+										<i class="far fa-envelope"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-4 col-sm-6 col-12">
+						<h3 class="title-foot mb-3">
+							دسترسی سریع
+						</h3>
+						<div class="row">
+							<div class="col-6">
+								<ul class="list mb-md-0 mb-3">
+									<li>
+										<a href="{{ path('template') }}">
+											طراحی وب سایت
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('templates') }}">
+											نمونه کارها
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('about_us') }}">
+											درباره ما
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('contact') }}">
+											تماس با ما
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-6">
+								<ul class="list mb-md-0 mb-3">
+									<li>
+										<a href="{{ path('law') }}">
+											قوانین و مقررات
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('faq') }}">
+											پرسش های متداول
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('complain') }}">
+											ثبت شکایات
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12">
+						<div class="Footer_newsletter mb-3">
+							<h3 class="title-foot c-dark-green text-center">
+								خبرنامه
+							</h3>
+							<div class="input mt-3">
+								<input type="text" class="form-control" placeholder="ایمیل خود را وارد نمایید" id="newsletter">
+							</div>
+							<div class="text-center mt-3">
+								<a href="" class="btn rounded-pill">
+									مشترک شوید
+									<span>
+										<i class="fa fa-arrow-left"></i>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="middle">
+				<div class="container">
+					<div class="row py-4">
+						<div class="col-12">
+							<div class="about_site_footer text-center">
+								<p class="desc mb-md-0 mb-3">
+									<a href="">
+										<img src="{{ asset('build/img/fourtheme/logo.png') }}" class="img-fluid d-inline-block" alt=""/>
+									</a>
+									شرکت برنامه نویسی وب سورس ، در زمینه طراحی سایت فروشگاهی ، سایت شرکتی ، سایت رزرواسیون ، و دیگر سایت ها فعالیت دارد
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom py-3 text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<p class="copyRight">
+								<span>
+									(1398)
+								</span>
+								طراحی و پیاده سازی توسط گروه نرم افزاری
+								<a href="" class="link c-dark-green">
+									<strong>
+										وب سورس
+									</strong>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+	</body>
 </html>
