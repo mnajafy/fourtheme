@@ -17,7 +17,6 @@ class UserType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('phoneNumber')
-            // ->add('roles')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',

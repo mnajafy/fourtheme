@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -29,9 +30,9 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('username'),
             EmailField::new('email'),
-            TextField::new('phoneNumber')->hideOnIndex(),
+            TelephoneField::new('phoneNumber')->hideOnIndex(),
             TextField::new('password')
-                ->onlyWhenCreating()
+                ->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
@@ -58,7 +59,8 @@ class UserCrudController extends AbstractCrudController
         return $filters
             ->add('username')
             ->add('email')
-            ->add('phoneNumber');
+            // ->add('phoneNumber')
+        ;
     }
 
     // public function configureCrud(Crud $crud): Crud
