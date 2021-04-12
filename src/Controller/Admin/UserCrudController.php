@@ -60,4 +60,14 @@ class UserCrudController extends AbstractCrudController
             ->add('email')
             ->add('phoneNumber');
     }
+
+    // public function configureCrud(Crud $crud): Crud
+    // {
+    //     return $crud
+    //         ->overrideTemplate('crud/detail', 'admin/user/detail.html.twig');
+    // 
+    //         ->overrideTemplates([
+    //             'crud/detail', 'admin/user/detail.html.twig',
+    //         ]);
+    // }
 }
