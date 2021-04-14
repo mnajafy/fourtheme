@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\ImageType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -12,13 +14,24 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+    private $params;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -32,6 +45,7 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             TelephoneField::new('phoneNumber')->hideOnIndex(),
             TextField::new('password')
+                // ->onlyWhenCreating()
                 ->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
@@ -42,9 +56,13 @@ class UserCrudController extends AbstractCrudController
                     'first_options'  => ['label' => 'Password'],
                     'second_options' => ['label' => 'Repeat Password'],
                 ]),
-            ArrayField::new('roles')->onlyOnDetail(),
+            // ArrayField::new('roles')->onlyOnDetail(),
+            ArrayField::new('roles'),
             DateTimeField::new('createdAt')->hideOnForm(),
             DateTimeField::new('updatedAt')->onlyOnDetail(),
+            CollectionField::new('images')
+                ->onlyOnDetail()
+                ->setTemplatePath('admin/field/images.html.twig')
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventSubscriber\EasyAdmin;
 
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class EasyAdminSubscriber implements EventSubscriberInterface
+class UserSubscriber implements EventSubscriberInterface
 {
     private $encoder;
 
@@ -43,7 +43,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public function updateUser(BeforeEntityUpdatedEvent $event)
     {
         $entity = $event->getEntityInstance();
-
+        
         if (!($entity instanceof User)) {
             return;
         }

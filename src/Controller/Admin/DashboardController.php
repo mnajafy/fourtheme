@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Image;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,13 +31,15 @@ class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
+            MenuItem::section('User'),
+            MenuItem::subMenu('Users', 'fa fa-user')->setSubItems([
+                MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+                MenuItem::linkToCrud('Images', 'fas fa-images', Image::class),
+            ]),
             // MenuItem::section('Blog'),
             // MenuItem::linkToCrud('Categories', 'fa fa-tags', Category::class),
             // MenuItem::linkToCrud('Blog Posts', 'fa fa-file-text', BlogPost::class),
-
-            // MenuItem::section('Users'),
             // MenuItem::linkToCrud('Comments', 'fa fa-comment', Comment::class),
-            MenuItem::linkToCrud('User', 'fa fa-user', User::class),
         ];
     }
 }
