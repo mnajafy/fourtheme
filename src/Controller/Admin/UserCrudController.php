@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Image;
 use App\Entity\User;
-use App\Form\ImageType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use App\Security\Voter\UserVoter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -14,24 +14,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-    private $params;
-
-    public function __construct(ParameterBagInterface $params)
-    {
-        $this->params = $params;
-    }
-
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -45,8 +36,7 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             TelephoneField::new('phoneNumber')->hideOnIndex(),
             TextField::new('password')
-                // ->onlyWhenCreating()
-                ->onlyOnForms()
+                ->onlyWhenCreating()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
@@ -56,8 +46,7 @@ class UserCrudController extends AbstractCrudController
                     'first_options'  => ['label' => 'Password'],
                     'second_options' => ['label' => 'Repeat Password'],
                 ]),
-            // ArrayField::new('roles')->onlyOnDetail(),
-            ArrayField::new('roles'),
+            // ArrayField::new('roles'),
             DateTimeField::new('createdAt')->hideOnForm(),
             DateTimeField::new('updatedAt')->onlyOnDetail(),
             CollectionField::new('images')
@@ -77,17 +66,16 @@ class UserCrudController extends AbstractCrudController
         return $filters
             ->add('username')
             ->add('email')
-            // ->add('phoneNumber')
         ;
     }
 
-    // public function configureCrud(Crud $crud): Crud
-    // {
-    //     return $crud
-    //         ->overrideTemplate('crud/detail', 'admin/user/detail.html.twig');
-    // 
-    //         ->overrideTemplates([
-    //             'crud/detail', 'admin/user/detail.html.twig',
-    //         ]);
-    // }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            // the labels used to refer to this entity in titles, buttons, etc.
+            ->setEntityLabelInSingular('User')
+            ->setEntityLabelInPlural('Users')
+            // ->setEntityPermission(UserVoter::VIEW)
+        ;
+    }
 }

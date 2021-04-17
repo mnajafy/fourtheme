@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Image;
 use App\Entity\User;
+use App\Entity\Image;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -36,10 +36,6 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
                 MenuItem::linkToCrud('Images', 'fas fa-images', Image::class),
             ]),
-            // MenuItem::section('Blog'),
-            // MenuItem::linkToCrud('Categories', 'fa fa-tags', Category::class),
-            // MenuItem::linkToCrud('Blog Posts', 'fa fa-file-text', BlogPost::class),
-            // MenuItem::linkToCrud('Comments', 'fa fa-comment', Comment::class),
         ];
     }
 }

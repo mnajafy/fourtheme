@@ -9,14 +9,17 @@
 			<h2>Les Images</h2>
 			<div class="row">
 				{% for image in images %}
-					<div class="col-md-4">
-						<div class="card" style="width: 18rem;">
-							<img class="card-img-top" src="{{ vich_uploader_asset(image) | imagine_filter('thumb') }}" alt="Card image cap">
-							<div class="card-footer text-muted">
-								{{ image.createdAt|date("d/m/Y h:i", "Europe/Paris") }}
+						<div class="col-md-4 mb-3">
+							<div class="card" style="width: 18rem;">
+								<img class="card-img-top" src="{{ vich_uploader_asset(image) | imagine_filter('thumb') }}" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">{{ app.user.username }}</h5>
+								</div>
+								<div class="card-footer text-muted">
+									{{ image.createdAt|date("d/m/Y h:i", "Europe/Paris") }}
+								</div>
 							</div>
 						</div>
-					</div>
 				{% endfor %}
 			</div>
 		</section>
