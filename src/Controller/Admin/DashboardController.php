@@ -9,9 +9,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class DashboardController extends AbstractDashboardController
 {
+    private $params;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
+
     /**
      * @Route("/admin", name="admin")
      */
@@ -31,11 +39,19 @@ class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            MenuItem::section('User'),
-            MenuItem::subMenu('Users', 'fa fa-user')->setSubItems([
-                MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
-                MenuItem::linkToCrud('Images', 'fas fa-images', Image::class),
+            // MenuItem::section('Profile'),
+            MenuItem::subMenu('Profile', 'fa fa-user')->setSubItems([
+                MenuItem::linkToCrud('Profile', 'fa fa-user', User::class)
+                    ->setAction('detail')
+                    ->setEntityId($this->getUser()->getId()),
+                MenuItem::linkToCrud('Edit username', 'fa fa-user', User::class)
+                    ->setAction('editUsername')
+                    ->set
+                    ->setEntityId($this->getUser()->getId()),
+                // MenuItem::linkToCrud('Edit username', 'fas fa-images', User::class),
             ]),
+            //     MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+            MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
         ];
     }
 }

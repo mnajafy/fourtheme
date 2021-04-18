@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
 use Symfony\Component\HttpFoundation\File\File;
@@ -11,7 +13,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
+ * @ORM\Table(name="fourtheme_Image")
  * @Vich\Uploadable
+ * 
+ * @author Mohammad Najafy <m.najafy@hotmail.com>
  */
 class Image implements \Serializable
 {
@@ -85,6 +90,22 @@ class Image implements \Serializable
      * @ORM\Column(type="simple_array")
      */
     private $dimensions = [];
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="images")
+     */
+    private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Template::class, mappedBy="images")
+     */
+    private $templates;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->templates = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -203,5 +224,56 @@ class Image implements \Serializable
             $this->id,
 
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Template[]
+     */
+    public function getTemplates(): Collection
+    {
+        return $this->templates;
+    }
+
+    public function addTemplate(Template $template): self
+    {
+        if (!$this->templates->contains($template)) {
+            $this->templates[] = $template;
+            $template->addImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplate(Template $template): self
+    {
+        if ($this->templates->removeElement($template)) {
+            $template->removeImage($this);
+        }
+
+        return $this;
     }
 }

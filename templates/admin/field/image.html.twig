@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-md-4 mb-2">
+        <div class="card">
+            <a href="#" class="ea-lightbox-thumbnail" data-featherlight="#{{ entity.instance.id }}" data-featherlight-close-on-click="anywhere">
+                <img src="{{ vich_uploader_asset(entity.instance) | imagine_filter('thumb') }}" class="img-fluid">
+            </a>
+
+            <div id="{{ entity.instance.id }}" class="ea-lightbox">
+                <img src="{{ vich_uploader_asset(entity.instance) | imagine_filter('medium') }}">
+            </div>
+        </div>
+    </div>
+</div>

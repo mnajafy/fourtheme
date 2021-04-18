@@ -88,9 +88,15 @@ class User implements UserInterface
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Template::class, mappedBy="author")
+     */
+    private $templates;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->templates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -238,5 +244,35 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection|Template[]
+     */
+    public function getTemplates(): Collection
+    {
+        return $this->templates;
+    }
+
+    public function addTemplate(Template $template): self
+    {
+        if (!$this->templates->contains($template)) {
+            $this->templates[] = $template;
+            $template->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplate(Template $template): self
+    {
+        if ($this->templates->removeElement($template)) {
+            // set the owning side to null (unless already changed)
+            if ($template->getAuthor() === $this) {
+                $template->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }
