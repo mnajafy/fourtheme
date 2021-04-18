@@ -44,14 +44,13 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Profile', 'fa fa-user', User::class)
                     ->setAction('detail')
                     ->setEntityId($this->getUser()->getId()),
-                MenuItem::linkToCrud('Edit username', 'fa fa-user', User::class)
-                    ->setAction('editUsername')
-                    ->set
+                MenuItem::linkToCrud('Edit password', 'fas fa-key', User::class)
+                    ->setAction('editPassword')
                     ->setEntityId($this->getUser()->getId()),
                 // MenuItem::linkToCrud('Edit username', 'fas fa-images', User::class),
             ]),
             //     MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
-            MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+            MenuItem::linkToCrud('Users', 'fas fa-list', User::class),
         ];
     }
 }
