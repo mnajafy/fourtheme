@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Image;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -39,17 +40,15 @@ class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            // MenuItem::section('Profile'),
-            MenuItem::subMenu('Profile', 'fa fa-user')->setSubItems([
-                MenuItem::linkToCrud('Profile', 'fa fa-user', User::class)
-                    ->setAction('detail')
-                    ->setEntityId($this->getUser()->getId()),
-                MenuItem::linkToCrud('Edit password', 'fas fa-key', User::class)
-                    ->setAction('editPassword')
-                    ->setEntityId($this->getUser()->getId()),
-                // MenuItem::linkToCrud('Edit username', 'fas fa-images', User::class),
-            ]),
+            MenuItem::section('Profile'),
+            MenuItem::linkToCrud('Profile', 'fa fa-user', User::class)
+                ->setAction('detail')
+                ->setEntityId($this->getUser()->getId()),
+            // MenuItem::subMenu('Profile', 'fa fa-user')->setSubItems([
             //     MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+            //     MenuItem::linkToCrud('Edit username', 'fas fa-images', User::class),
+            // ]),
+            MenuItem::section('Users'),
             MenuItem::linkToCrud('Users', 'fas fa-list', User::class),
         ];
     }
