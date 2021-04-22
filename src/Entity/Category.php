@@ -66,6 +66,11 @@ class Category
      */
     private $images;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="categories")
+     */
+    private $author;
+
     public function __construct()
     {
         $this->templates = new ArrayCollection();
@@ -178,6 +183,18 @@ class Category
         if ($this->images->removeElement($image)) {
             $image->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

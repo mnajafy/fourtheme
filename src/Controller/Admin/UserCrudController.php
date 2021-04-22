@@ -20,14 +20,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController
 {
-    private $adminUrlGenerator;
-    private $encoder;
     private $security;
 
-    public function __construct(AdminUrlGenerator $adminUrlGenerator, UserPasswordEncoderInterface $encoder, Security $security)
+    public function __construct(Security $security)
     {
-        $this->adminUrlGenerator = $adminUrlGenerator;
-        $this->encoder = $encoder;
         $this->security = $security;
     }
 
@@ -41,13 +37,6 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('username'),
-            TextField::new('password')
-                ->onlyWhenCreating()
-                ->setFormType(RepeatedType::class, [
-                    'type' => PasswordType::class,
-                    'first_options'  => ['label' => 'Password'],
-                    'second_options' => ['label' => 'Repeat Password'],
-                ]),
             EmailField::new('email')->hideOnIndex(),
             TelephoneField::new('phoneNumber')->hideOnIndex(),
         ];
@@ -59,29 +48,18 @@ class UserCrudController extends AbstractCrudController
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->add(Crud::PAGE_EDIT, Action::DETAIL)
         // update
-            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
-                return $action->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::EDIT, $user));
-            })
-            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
-                return $action->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::DELETE, $user));
-            })
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::EDIT, $user));
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action->setCssClass('btn btn-danger')->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::DELETE, $user));
             })
-            ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
-                return $action->displayIf(function (User $user) {
-                    if ($user === $this->getUser()) {
-                        return false;
-                    }
-                    return true;
-                });
-            })
-        // remove
+            // remove
             ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT)
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
-        ;
+            ->remove(Crud::PAGE_DETAIL, Action::INDEX)
+        ; 
     }
 }

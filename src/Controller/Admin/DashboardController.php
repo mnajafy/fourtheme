@@ -2,11 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\User;
-use App\Entity\Image;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -40,19 +39,16 @@ class DashboardController extends AbstractDashboardController
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
-            // ->setName($user->getUsername())
-            // ->displayUserName(false)
             ->setAvatarUrl('build/img/fourtheme/user.svg')
-            // ->displayUserAvatar(false)
-            // ->setGravatarEmail($user->getEmail())
 
-            // ->addMenuItems([
-            //     MenuItem::linkToRoute('My Profile', 'fa fa-id-card', User::class),
-            //     MenuItem::linkToRoute('Settings', 'fa fa-user-cog', User::class),
-            //     MenuItem::section(),
-            //     MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
-            // ])
-            ;
+            ->addMenuItems([
+                MenuItem::linkToCrud('My Profile', 'fa fa-id-card', User::class)
+                    ->setAction('detail')
+                    ->setEntityId($this->getUser()->getId()),
+                MenuItem::linkToCrud('Settings', 'fa fa-user-cog', User::class)
+                    ->setAction('edit')
+                    ->setEntityId($this->getUser()->getId()),
+            ]);
     }
 
     public function configureMenuItems(): iterable
@@ -60,16 +56,9 @@ class DashboardController extends AbstractDashboardController
         return [
             // MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            MenuItem::section('Profile'),
-            MenuItem::linkToCrud('Profile', 'fa fa-user', User::class)
-                ->setAction('detail')
-                ->setEntityId($this->getUser()->getId()),
-            // MenuItem::subMenu('Profile', 'fa fa-user')->setSubItems([
-            //     MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
-            //     MenuItem::linkToCrud('Edit username', 'fas fa-images', User::class),
-            // ]),
             MenuItem::section('Users'),
-            MenuItem::linkToCrud('Users', 'fas fa-list', User::class),
+            MenuItem::linkToCrud('Users', 'fas fa-users', User::class),
+            MenuItem::linkToCrud('Category', 'fas fa-clipboard-list', Category::class),
         ];
     }
 }
