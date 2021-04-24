@@ -51,14 +51,14 @@
 									<div class="item-workSample mb-4">
 										<div class="image shadow-sm border">
 										{% for image in template.images %}
-											<a href="">
+											<a href="{{ path('template', {'title': template.title}) }}">
 												<img src="{{ vich_uploader_asset(image) | imagine_filter('thumb') }}" class="img-fluid d-block Max_img" alt=""/>
 											</a>
 										{% endfor %}
 										</div>
 										<div class="text text-center mt-3">
 											<h3 class="title">
-												<a href="">
+												<a href="{{ path('template', {'title': template.title}) }}">
 													{{ template.title }}
 												</a>
 											</h3>

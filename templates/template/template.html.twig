@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block body %}
-
 	<section class="py-5">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
@@ -28,7 +27,7 @@
 				<div class="col-lg-7 col-md-9 col-sm-10 col-12 order-lg-2 order-3">
 					<div class="desc-simple mb-5">
 						<h1 class="title text-center mb-3" data-aos-duration="1500" data-aos="fade-up">
-							طراحی فروشگاه اینترنتی روبانکس
+							{{ template.title }}
 						</h1>
 						<p class="desc mb-3">
 							وب سورس مفتخر همکاری در زمینه
@@ -47,11 +46,14 @@
 					</div>
 
 					<div class="image shadow-sm border rounded p-2">
-						<img src="assets/img/product/mainP2.jpg" class="img-fluid d-block Max_img" alt=""/>
-
+						{% for image in template.images %}
+							<img src="{{ vich_uploader_asset(image) | imagine_filter('medium') }}" class="img-fluid d-block Max_img" alt="{{ template.title }}"/>
+						{% endfor %}
 						<div class="mt-5">
-							<img src="assets/img/responsive-foot1.png" class="img-fluid d-block Max_img" alt=""/>
+							<img src="{{ asset('build/img/fourtheme/responsive-foot1.png') }}" class="img-fluid d-block Max_img" alt=""/>
 						</div>
+
+
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-3 col-12 order-lg-3 order-2 d-md-block d-none">

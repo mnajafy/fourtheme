@@ -19,7 +19,7 @@ class TwigEventSubscriber implements EventSubscriberInterface
     }
     public function onKernelController(ControllerEvent $event)
     {
-        $this->twig->addGlobal('header_nav_categories', $this->categoryRepository->findAll());
+        $this->twig->addGlobal('global_categories', $this->categoryRepository->findAll());
     }
 
     public static function getSubscribedEvents()

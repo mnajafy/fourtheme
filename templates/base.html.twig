@@ -77,8 +77,7 @@
 									</a>
 									<div class="wsmegamenu clearfix halfmenu">
 										<ul class="wstliststy06 clearfix">
-										{% for category in header_nav_categories %}
-											
+										{% for category in global_categories %}
 											<li>
 												<a href="{{ path('template_category', {'title': category.title}) }}">{{ category.title }}</a>
 											</li>
@@ -235,7 +234,7 @@
 							<div class="col-6">
 								<ul class="list mb-md-0 mb-3">
 									<li>
-										<a href="{{ path('template') }}">
+										<a href="">
 											طراحی وب سایت
 										</a>
 									</li>
