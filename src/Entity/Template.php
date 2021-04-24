@@ -67,7 +67,7 @@ class Template
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Image::class, inversedBy="templates")
+     * @ORM\ManyToMany(targetEntity=Image::class, inversedBy="templates", cascade={"persist"})
      */
     private $images;
 

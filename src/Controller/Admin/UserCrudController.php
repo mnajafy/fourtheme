@@ -55,17 +55,21 @@ class UserCrudController extends AbstractCrudController
             ->add(Crud::PAGE_EDIT, $detail)
         // update
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
-                return $action->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::EDIT, $user));
+                return $action
+                    ->setIcon('fas fa-edit')->setLabel(false)
+                    ->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::EDIT, $user));
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
-                return $action->setCssClass('btn btn-danger')->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::DELETE, $user));
+                return $action
+                    ->setCssClass('btn btn-danger')
+                    ->setLabel(false)
+                    ->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::DELETE, $user));
             })
             // remove
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::EDIT)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
-            ->remove(Crud::PAGE_DETAIL, Action::INDEX)
         ; 
     }
 }

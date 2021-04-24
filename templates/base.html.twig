@@ -77,21 +77,12 @@
 									</a>
 									<div class="wsmegamenu clearfix halfmenu">
 										<ul class="wstliststy06 clearfix">
+										{% for category in header_nav_categories %}
+											
 											<li>
-												<a href="{{ path('template_category') }}">طراحی وب سایت</a>
+												<a href="{{ path('template_category', {'title': category.title}) }}">{{ category.title }}</a>
 											</li>
-											<li>
-												<a href="{{ path('template_category') }}">طراحی سایت فروشگاهی</a>
-											</li>
-											<li>
-												<a href="{{ path('template_category') }}">طراحی سایت رزرواسیون</a>
-											</li>
-											<li>
-												<a href="{{ path('template_category') }}">طراحی سایت شرکتی</a>
-											</li>
-											<li>
-												<a href="{{ path('template_category') }}">طراحی سایت خلاقانه</a>
-											</li>
+										{% endfor %}
 										</ul>
 									</div>
 								</li>
@@ -182,7 +173,7 @@
 			</section>
 
 		{% endblock %}
-
+		
 		{% block body %}{% endblock %}
 
 		<footer id="section7">

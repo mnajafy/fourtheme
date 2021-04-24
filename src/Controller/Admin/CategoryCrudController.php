@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -32,23 +33,25 @@ class CategoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title'),
-            TextField::new('summary'),
+            TextField::new('author')->hideOnForm(),
+            TextField::new('summary')->hideOnIndex(),
             TextEditorField::new('content')->hideOnIndex(),
+            AssociationField::new('images')->hideOnForm(),
+            AssociationField::new('templates')->hideOnForm(),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
+        $detail = Action::new('Detail', null, 'fas fa-eye')
+        ->setLabel(false)
+            ->linkToCrudAction('detail')
+            ->setCssClass('btn btn-success');
+
         return $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->add(Crud::PAGE_EDIT, Action::DETAIL)
+            ->add(Crud::PAGE_INDEX, $detail)
+            ->add(Crud::PAGE_EDIT, $detail)
             // update
-            ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
-            return $action
-                ->setCssClass('btn btn-success')
-                ->setIcon('fas fa-eye')
-                ->setLabel(false);
-            })
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
                 return $action
                     ->setCssClass('btn btn-info')

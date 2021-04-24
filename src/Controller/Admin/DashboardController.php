@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Entity\Image;
+use App\Entity\Template;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,10 +56,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         return [
-            // MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            MenuItem::section('Users'),
+            MenuItem::section('users'),
             MenuItem::linkToCrud('Users', 'fas fa-users', User::class),
+            MenuItem::section('Templates'),
+            MenuItem::linkToCrud('Templates', 'fas fa-folder-open', Template::class),
             MenuItem::linkToCrud('Categories', 'fas fa-clipboard-list', Category::class),
             MenuItem::linkToCrud('Images', 'fas fa-images', Image::class),
         ];

@@ -2,23 +2,24 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Image;
-use App\Security\Voter\ImageVoter;
+use App\Form\ImageType;
+use App\Entity\Template;
+use App\Security\Voter\TemplateVoter;
 use Symfony\Component\Security\Core\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class ImageCrudController extends AbstractCrudController
+class TemplateCrudController extends AbstractCrudController
 {
     private $security;
     private $params;
@@ -31,34 +32,36 @@ class ImageCrudController extends AbstractCrudController
     
     public static function getEntityFqcn(): string
     {
-        return Image::class;
+        return Template::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->onlyOnIndex(),
+            TextField::new('title'),
             TextField::new('author')->hideOnForm(),
-            Field::new('imageFile')
-                ->onlyOnForms()
-                ->setFormType(VichImageType::class),
-            ImageField::new('image')
-                ->setBasePath($this->params->get('app.path.uploads_images'))
-                ->hideOnForm()
-                ->setFormType(VichImageType::class),
+            TextField::new('summary')->hideOnIndex(),
+            TextEditorField::new('content')->hideOnIndex(),
             AssociationField::new('categories')->hideOnDetail(),
             ArrayField::new('categories')->onlyOnDetail(),
-            AssociationField::new('templates')->onlyOnIndex(),
+            AssociationField::new('images')->onlyOnIndex(),
+            CollectionField::new('images')
+                ->setEntryType(ImageType::class)
+                ->onlyOnForms(),
+            CollectionField::new('images')
+                ->setEntryType(VichImageType::class)
+                ->setTemplatePath('admin/field/images.html.twig')
+                ->onlyOnDetail(),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
         $detail = Action::new('Detail', null, 'fas fa-eye')
-            ->setLabel(false)
+        ->setLabel(false)
             ->linkToCrudAction('detail')
-            ->setCssClass('btn btn-success')
-        ;
+            ->setCssClass('btn btn-success');
 
         return $actions
             ->add(Crud::PAGE_INDEX, $detail)
@@ -68,27 +71,27 @@ class ImageCrudController extends AbstractCrudController
                 return $action
                     ->setCssClass('btn btn-info')
                     ->setIcon('fas fa-edit')->setLabel(false)
-                    ->displayIf(fn (Image $image) => $this->security->isGranted(ImageVoter::EDIT, $image))
-                ;
+                    ->displayIf(fn (Template $template) => $this->security->isGranted(TemplateVoter::EDIT, $template));
             })
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
                 return $action
+                    ->setIcon('fas fa-trash-alt')
+                    ->setLabel(false)
                     ->setCssClass('btn btn-danger')
-                    ->setIcon('fas fa-trash-alt')->setLabel(false)
-                    ->displayIf(fn (Image $image) => $this->security->isGranted(ImageVoter::EDIT, $image));
+                    ->displayIf(fn (Template $template) => $this->security->isGranted(TemplateVoter::DELETE, $template));
             })
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action
-                    ->setCssClass('btn btn-info')
                     ->setIcon('fas fa-edit')->setLabel(false)
-                    ->displayIf(fn (Image $image) => $this->security->isGranted(ImageVoter::EDIT, $image));
+                    ->displayIf(fn (Template $template) => $this->security->isGranted(TemplateVoter::EDIT, $template));
             })
             ->update(Crud::PAGE_DETAIL, Action::DELETE, function (Action $action) {
                 return $action
+                    ->setLabel(false)
                     ->setCssClass('btn btn-danger')
-                    ->setIcon('fas fa-trash-alt')->setLabel(false)
-                    ->displayIf(fn (Image $image) => $this->security->isGranted(ImageVoter::EDIT, $image));
+                    ->displayIf(fn (Template $template) => $this->security->isGranted(TemplateVoter::DELETE, $template));
             })
-        ;
+            // remove
+            ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE);
     }
 }
