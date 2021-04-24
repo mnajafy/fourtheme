@@ -92,7 +92,7 @@ class Image implements \Serializable
     private $dimensions = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="images")
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="images", cascade={"persist"})
      */
     private $categories;
 

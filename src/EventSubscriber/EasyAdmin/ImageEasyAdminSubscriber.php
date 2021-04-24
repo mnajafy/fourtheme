@@ -2,7 +2,9 @@
 
 namespace App\EventSubscriber\EasyAdmin;
 
+use App\Entity\Category;
 use App\Entity\Image;
+use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -10,17 +12,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ImageSubscriber implements EventSubscriberInterface
+class ImageEasyAdminSubscriber implements EventSubscriberInterface
 {
     private $token;
     private $cacheManager;
     private $uploaderHelper;
+    private $entityManager;
 
-    public function __construct(TokenStorageInterface $tokenStorage, CacheManager $cacheManager, UploaderHelper $uploaderHelper)
+    public function __construct(TokenStorageInterface $tokenStorage, CacheManager $cacheManager, UploaderHelper $uploaderHelper, EntityManagerInterface $entityManager)
     {
         $this->token = $tokenStorage->getToken();
         $this->cacheManager = $cacheManager;
         $this->uploaderHelper = $uploaderHelper;
+        $this->entityManager = $entityManager;
     }
 
     public static function getSubscribedEvents()
@@ -34,7 +38,7 @@ class ImageSubscriber implements EventSubscriberInterface
     public function newImage(BeforeEntityPersistedEvent $event)
     {
         $entity = $event->getEntityInstance();
-        
+
         if (!($entity instanceof Image)) {
             return;
         }
@@ -49,7 +53,7 @@ class ImageSubscriber implements EventSubscriberInterface
         if (!$entity instanceof Image) {
             return;
         }
-        
+
         $this->cacheManager->remove($this->uploaderHelper->asset($entity, 'imageFile'));
     }
 }

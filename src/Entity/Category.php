@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="fourtheme_category")
+ * @UniqueEntity("title")
  * 
  * @author Mohammad Najafy <m.najafy@hotmail.com>
  */
@@ -197,5 +199,10 @@ class Category
         $this->author = $author;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Image;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,7 +59,8 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Users'),
             MenuItem::linkToCrud('Users', 'fas fa-users', User::class),
-            MenuItem::linkToCrud('Category', 'fas fa-clipboard-list', Category::class),
+            MenuItem::linkToCrud('Categories', 'fas fa-clipboard-list', Category::class),
+            MenuItem::linkToCrud('Images', 'fas fa-images', Image::class),
         ];
     }
 }

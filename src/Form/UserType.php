@@ -25,8 +25,6 @@ class UserType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
-            // ->add('createdAt')
-            // ->add('updatedAt')
         ;
     }
 
