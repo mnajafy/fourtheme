@@ -44,9 +44,15 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        $detail = Action::new('Detail', null, 'fas fa-eye')
+            ->setLabel(false)
+                ->linkToCrudAction('detail')
+                ->setCssClass('btn btn-success')
+            ;
+
         return $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->add(Crud::PAGE_EDIT, Action::DETAIL)
+            ->add(Crud::PAGE_INDEX, $detail)
+            ->add(Crud::PAGE_EDIT, $detail)
         // update
             ->update(Crud::PAGE_DETAIL, Action::EDIT, function (Action $action) {
                 return $action->displayIf(fn (User $user) => $this->security->isGranted(UserVoter::EDIT, $user));

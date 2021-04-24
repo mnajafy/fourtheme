@@ -57,8 +57,8 @@ class ImageCrudController extends AbstractCrudController
             ->setLabel(false)
             ->linkToCrudAction('detail')
             ->setCssClass('btn btn-success')
-            ->displayIf(fn (Image $image) => $this->security->isGranted(ImageVoter::EDIT, $image))
         ;
+
         return $actions
             ->add(Crud::PAGE_INDEX, $detail)
             ->add(Crud::PAGE_EDIT, $detail)
