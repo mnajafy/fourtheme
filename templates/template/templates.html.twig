@@ -10,7 +10,7 @@
 				<div class="col-lg-2 col-md-3 col-12">
 					<div class="group-list-side mb-5 bg-Light sticky-top">
 						<ul class="smooth-scroll">
-							{% for category in categories %}
+							{% for category in global_categories %}
 								<li>
 									<a href="{{ path('templates') }}#{{ category.title }}">
 										{{ category.title }}
@@ -31,7 +31,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9 col-12">
-				{% for category in categories %}
+				{% for category in global_categories %}
 					<div class="row" id="{{ category.title }}">
 						<div class="col-12">
 							<div class="row">
@@ -89,7 +89,7 @@
 								</div>
 							</div>
 
-							<div class="row">
+							{# <div class="row">
 								<div class="col-md-4 col-6">
 									<div class="item-workSample mb-4">
 										<div class="image shadow-sm border">
@@ -105,7 +105,7 @@
 											</h3>
 										</div>
 									</div>
-								</div>
+								</div> 
 								<div class="col-md-4 col-6">
 									<div class="item-workSample mb-4">
 										<div class="image shadow-sm border">
@@ -121,7 +121,7 @@
 											</h3>
 										</div>
 									</div>
-								</div>
+								</div>#}
 							</div>
 						</div>
 					</div>

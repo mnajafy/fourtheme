@@ -13,17 +13,13 @@ class LawController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('law/index.html.twig', [
-            'controller_name' => 'LawController',
-        ]);
+        return $this->render('law/index.html.twig');
     }
     /**
      * @Route("/complain", name="complain")
      */
     public function complain(): Response
     {
-        return $this->render('law/complain.html.twig', [
-            
-        ]);
+        return $this->render('law/complain.html.twig');
     }
 }

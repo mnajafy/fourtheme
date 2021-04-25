@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use Twig\Environment;
 use App\Entity\Category;
 use App\Entity\Template;
-use App\Repository\CategoryRepository;
-use EasyCorp\Bundle\EasyAdminBundle\Registry\TemplateRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +13,9 @@ class TemplateController extends AbstractController
     /**
      * @Route("/templates", name="templates")
      */
-    public function templates(CategoryRepository $category): Response
+    public function templates(): Response
     {
-        return $this->render('template/templates.html.twig', [
-            'categories' => $category->findAll(),
-        ]);
+        return $this->render('template/templates.html.twig');
     }
     /**
      * @Route("/template/{title}", name="template")

@@ -19,6 +19,31 @@ class TemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, Template::class);
     }
 
+    /**
+     * @param int $max
+     * @return Template[] Returns an array of Template objects
+     */
+    public function findMaxResults($max = 3)
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.createdAt', 'DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Template[] Returns an array of Template objects
+     */
+    public function findCreatedAt()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Template[] Returns an array of Template objects
     //  */

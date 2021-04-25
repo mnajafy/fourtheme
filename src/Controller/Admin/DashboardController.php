@@ -13,17 +13,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class DashboardController extends AbstractDashboardController
 {
-    private $params;
-
-    public function __construct(ParameterBagInterface $params)
-    {
-        $this->params = $params;
-    }
-
     /**
      * @Route("/admin", name="admin")
      */

@@ -4,24 +4,24 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<section class="py-3">
-			<h2>Les Images</h2>
+	<div class="container border w-75 my-5">
+		{% for template in templates %}
 			<div class="row">
-				{% for image in images %}
-						<div class="col-md-4 mb-3">
-							<div class="card" style="width: 18rem;">
-								<img class="card-img-top" src="{{ vich_uploader_asset(image) | imagine_filter('thumb') }}" alt="Card image cap">
-								<div class="card-body">
-									<h5 class="card-title">{{ app.user.username }}</h5>
-								</div>
-								<div class="card-footer text-muted">
-									{{ image.createdAt|date("d/m/Y h:i", "Europe/Paris") }}
-								</div>
-							</div>
+				<div class="col-10 mx-auto mb-5">
+					<div class="card mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">{{ template.title }}</h5>
+							<p class="card-text">{{ template.summary }}</p>
+							<p class="card-text">{{ template.content|raw }}</p>
+							{# <a href="#" class="btn btn-primary">Go somewhere</a> #}
+							<p class="card-text"><small class="text-muted">{{ template.createdAt|date("d/m/Y", "Europe/Paris") }}</small></p>
 						</div>
-				{% endfor %}
+						{% for image in template.images %}
+							<img src="{{ vich_uploader_asset(image) | imagine_filter('thumb') }}" class="card-img-bottom" alt=""/>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
-		</section>
+		{% endfor %}
 	</div>
 {% endblock %}
