@@ -15,7 +15,7 @@ class BlogController extends AbstractController
     public function index(TemplateRepository $templateRepository): Response
     {
         return $this->render('blog/index.html.twig', [
-            'templates' => $templateRepository->findCreatedAt(),
+            'templates' => $templateRepository->findAll(),
         ]);
     }
 }
