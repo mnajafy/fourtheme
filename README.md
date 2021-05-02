@@ -2,19 +2,25 @@
 
 ## Main Features:
 
-* HTML, CSS 
-    * dart-sass
+* HTML, CSS: 
+    * Dart-sass
     * Bootstrap-4.0.0
     * Font Awesome-5.15.3
 
-* JS
-    * jquery-3.6.0
-    * parallax.js-1.5.0
+* JS:
+    * JQuery-3.6.0
+    * Parallax.js-1.5.0
     * Aos
-    * Yarn
 
-* PHP
+* PHP:
     * SYMFONY
+        * Composer
+        * Yarn
+        * Image:
+            * liip_imagine
+            * vich_uploader
+        * stof_doctrine_extensions
+        * webpack_encore
 
 ## Fonts:
 
